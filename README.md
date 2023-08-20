@@ -63,6 +63,10 @@ Add a small script, and rewrite the stylesheet tags as a
   <script>
     document.write(getStylesheetTagsForDarkModeToggle('light.css', 'dark.css'));
   </script>
+  <noscript>
+    <link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
+  </noscript>
   <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
 </head>
 <!-- ... -->
