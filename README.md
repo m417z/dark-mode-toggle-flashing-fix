@@ -53,20 +53,18 @@ tl;dr having this per the `dark-mode-toggle` instructions:
 </aside>
 ```
 
-Add a small script, and rewrite the stylesheet tags as a
-`getStylesheetTagsForDarkModeToggle` call as following:
+Wrap the stylesheet tags with `<noscript
+id="dark-mode-toggle-stylesheets">...</noscript>` and add a small loader script
+as following:
 
 ```html
 <head>
   <link rel="stylesheet" href="common.css">
-  <script>function getStylesheetTagsForDarkModeToggle(e,l){"use strict";let t="prefers-color-scheme",r="light",a="dark",s="not all",c=null;try{c=localStorage.getItem("dark-mode-toggle")}catch(h){}let n=`(${t}: ${r})`,o=`(${t}: ${a})`;switch(c){case r:n+=", all",o+=" and "+s;break;case a:o+=", all",n+=" and "+s}return`<link rel="stylesheet" href="${e}" media="${n}"><link rel="stylesheet" href="${l}" media="${o}">`}</script>
-  <script>
-    document.write(getStylesheetTagsForDarkModeToggle('light.css', 'dark.css'));
-  </script>
-  <noscript>
+  <noscript id="dark-mode-toggle-stylesheets">
     <link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
   </noscript>
+  <script src="dark-mode-toggle-stylesheets-loader.min.js"></script>
   <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
 </head>
 <!-- ... -->
